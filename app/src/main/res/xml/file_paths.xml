@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <external-path
+            name="camera_photos"
+            path="" />
+
+        <root-path name="name" path="" />
+        <cache-path name="my_cache" path="" /><!--getCacheDir-->
+        <!--<external-path name="name" path="" />-->
+    </paths>
+
+    <paths xmlns:android="http://schemas.android.com/apk/res/android">
+             <external-files-path name="external_files_path" path="Download" />
+        <!--为了适配所有路径可以设置 path = "." -->
+    </paths>
+</resources>

@@ -1,0 +1,14 @@
+{
+  "version": "16",
+  "router_list": [
+    "/",
+    "/boy.do",
+    "/girl.do",
+    "/transfer",
+    "/transfer/download",
+    "/User/mymessage.do",
+    "/usercenter.do",
+    "/buyadvip.do",
+    "/pays.do"
+  ]
+}

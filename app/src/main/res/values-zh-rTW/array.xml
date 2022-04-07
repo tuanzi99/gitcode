@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <!--首頁tab-->
+
+    <string-array name="home_tabs">
+
+        <item>男生</item>
+
+        <item>女生</item>
+
+    </string-array>
+
+
+    <string-array name="bookself_menu">
+
+        <item>書架管理</item>
+
+        <item>下載管理</item>
+
+        <item>回饋意見</item>
+
+    </string-array>
+
+
+    <string-array name="ReadSettingMenuMoreList">
+
+        <item>作品詳情</item>
+
+        <item>添加書簽</item>
+
+        <item>打賞</item>
+
+        <item>下載本書</item>
+        <item>開啟更新提醒</item>
+
+        <item>分享好友</item>
+
+    </string-array>
+
+    <string-array name="ReadSettingMenuMoreList2">
+
+        <item>作品詳情</item>
+
+        <item>添加書簽</item>
+
+        <item>打賞</item>
+
+        <item>開啟更新提醒</item>
+
+        <item>分享好友</item>
+
+    </string-array>
+    <!--個人中心menu選單-->
+
+    <string-array name="person_menu">
+
+        <item>設定</item>
+
+        <item>幫助與迴響</item>
+
+        <item>切換帳號</item>
+
+    </string-array>
+
+    <integer-array name="autoPlayTime_array">
+
+        <!--<item>5</item>-->
+
+        <item>10</item>
+
+        <!--<item>15</item>-->
+
+        <item>20</item>
+
+        <!--<item>25</item>-->
+
+        <item>30</item>
+
+        <item>40</item>
+
+        <item>50</item>
+
+        <item>60</item>
+
+    </integer-array>
+
+
+    <integer-array name="read_pre_num_array">
+
+        <item>3</item>
+        <item>5</item>
+        <item>7</item>
+    </integer-array>
+    <integer-array name="check_update_time_array">
+        <item>-1</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+    </integer-array>
+    <string-array name="reader_reaerd_tips">
+        <item>金幣可以換蘋果手機哦!</item>
+        <item>每天做任務獲得更多金幣!</item>
+        <item>金幣可換取全站vip閱讀許可權!</item>
+        <item>每日簽到可獲得更多金幣!</item>
+        <item>閱讀越多有機會獲得更多金幣!</item>
+        <item>金幣可以換流量哦!</item>
+    </string-array>
+    <string-array name="voice_type">
+        <item>普通女聲</item>
+        <item>普通男聲</item>
+        <item>特別男聲</item>
+        <item>情感男聲</item>
+        <item>情感兒童聲</item>
+    </string-array>
+
+    <string-array name="speech_time">
+        <item>無</item>
+        <item>10分鍾後</item>
+        <item>20分鍾後</item>
+        <item>30分鍾後</item>
+        <item>40分鍾後</item>
+        <item>50分鍾後</item>
+        <item>60分鍾後</item>
+    </string-array>
+    <string-array name="speech_time_minutes">
+        <item>0</item>  <!--无-->
+        <item>10</item> <!--10分钟后关闭听书-->
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
+</resources>

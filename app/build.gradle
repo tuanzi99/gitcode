@@ -1,0 +1,224 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'io.fabric'
+android {
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    useLibrary 'org.apache.http.legacy'
+    signingConfigs {
+        release {
+            keyAlias 'pdfview'
+            keyPassword 'pdfview'
+            storeFile file('../misc/pdfview.keystore')
+            storePassword 'pdfview'
+        }
+        debug {
+            keyAlias 'pdfview'
+            keyPassword 'pdfview'
+            storeFile file('../misc/pdfview.keystore')
+            storePassword 'pdfview'
+        }
+    }
+    compileSdkVersion 31
+    dexOptions {
+        javaMaxHeapSize "4g"
+        maxProcessCount 4
+    }
+    defaultConfig {
+        applicationId "demo.hs"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 82
+        versionName "6.5.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "xhSafuAYUa8r0lCn5RsEj7",
+                GETUI_APP_KEY   : "TcT8bwUi836lLNk6yXwov4",
+                GETUI_APP_SECRET: "6VYD2MZp1AAbXHXcfLlvE3"
+        ]
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/license/LICENSE.base64.txt'
+    }
+    // 多渠道打包（示例配置）
+    productFlavors {
+        xing_dny {}
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+    flavorDimensions "default"
+    android.applicationVariants.all {
+        variant->
+            variant.outputs.all {
+                output->
+                    def outputFile=output.outputFile
+                    if (outputFile!=null && outputFile.name.contains('release')){
+                        variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + File.separator + "release_apk")
+                        def fileName="${variant.productFlavors[0].name}_vc${variant.versionCode}_v${variant.versionName}_${releaseTime()}.apk"
+                        outputFileName=fileName;
+                    }
+            }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("MMddHHmm", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+greendao{
+    schemaVersion 9
+    daoPackage 'demo.hs.entity.gen'
+    targetGenDir 'src/main/java'
+}
+
+repositories {
+    flatDir{
+        dirs 'libs'
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+    maven {
+        url 'https://dl.bintray.com/qichuan/maven/'
+    }
+    maven { url "https://s3.amazonaws.com/moat-sdk-builds" }
+
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+}
+//configurations {
+//    all*.exclude group: 'androidx.work'
+//
+//}
+dependencies {
+    implementation fileTree(include: ['*.aar', '*.jar'], dir: 'libs')
+
+    implementation 'com.google.guava:guava:29.0-android'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.3.0-alpha05', {
+        exclude group: 'androidx.appcompat', module: 'appcompat-appcompat'
+    })
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //glide
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+    //glide transformations
+    //网络
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    //    implementation 'io.reactivex:rxandroid:1.1.0'
+    //    implementation 'io.reactivex:rxjava:1.1.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
+    implementation 'org.reactivestreams:reactive-streams:1.0.3'
+    // RxBus
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
+    implementation 'com.gyf.immersionbar:immersionbar:2.3.2'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.0.0-beta4'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+//    implementation 'com.bilibili:magicasakura:0.1.8@aar'
+    implementation 'org.greenrobot:greendao:3.2.0'
+//    implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'com.wang.avi:library:2.1.3'
+    implementation 'com.youth.banner:banner:1.4.10'
+//    implementation 'com.jakewharton:butterknife:10.0.0'
+//    annotationProcessor "com.jakewharton:butterknife-compiler:10.0.0"
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.just.agentweb:agentweb:4.0.2'
+    implementation 'com.just.agentweb:download:4.0.2'
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+//    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-24'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-24'//没有使用特殊Header，可以不加这行
+    implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:1.5.0@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.2@aar'
+    implementation 'com.facebook.android:facebook-android-sdk:7.1.0'
+    implementation 'com.facebook.android:facebook-marketing:7.0.0'
+    implementation 'com.facebook.android:facebook-applinks:7.1.0'
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'androidx.core:core:1.0.0'
+    implementation 'androidx.work:work-runtime:2.6.0'
+//    implementation 'androidx.hilt:hilt-work:1.0.0'
+//    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation "androidx.work:work-runtime-ktx:2.6.0"
+    implementation "androidx.work:work-rxjava2:2.6.0"
+    implementation "androidx.work:work-gcm:2.6.0"
+    androidTestImplementation "androidx.work:work-testing:2.6.0"
+    implementation "androidx.work:work-multiprocess:2.6.0"
+    implementation "androidx.startup:startup-runtime:1.0.0"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
+    implementation 'com.facebook.android:audience-network-sdk:6.8.0'
+    implementation 'com.inmobi.monetization:inmobi-ads:7.2.7'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.llew.huawei:verifier:1.1.1'
+
+    implementation 'com.hjq:toast:6.0'
+
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation "androidx.versionedparcelable:versionedparcelable:1.1.0"
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.google.android.ads:mediation-test-suite:2.0.0'
+    implementation 'com.google.ads.mediation:unity:4.0.0.0'
+    implementation 'com.google.ads.mediation:facebook:6.8.0.0'
+    implementation  'com.umeng.umsdk:common:9.3.8'
+    implementation  'com.umeng.umsdk:asms:1.2.2' // asms包依赖(必选)
+    implementation 'com.umeng.umsdk:crash:0.0.5' // native crash包依赖(必选)
+
+    implementation 'com.unity3d.ads:unity-ads:4.0.1'
+    implementation  'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.6.5'//微信官方SDK依赖库
+}
+apply plugin: 'com.google.gms.google-services'

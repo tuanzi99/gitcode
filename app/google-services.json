@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "106187216531",
+    "firebase_url": "https://gps-installer.firebaseio.com",
+    "project_id": "gps-installer",
+    "storage_bucket": "gps-installer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653191362891:android:16e60b2c9d78729a6c50ce",
+        "android_client_info": {
+          "package_name": "demo.hs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653191362891-se741d00mgdc9ad7865vf10s3h072ffr.apps.googleusercontent.com",
+          "client_type": 3,
+          "android_info": {
+            "package_name": "demo.hs",
+            "certificate_hash": "827d65fec9f6ec29129438fcc3d16a150c852bbb"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO9QM04rppYFfEo73ndCKWuD1nHueDnxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355138173179-l8uuo8iak6drboc6rgnj12re1g7linoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
